@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- USING BOOTSTRAP 4 -->
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/bf1ae3b600.js" crossorigin="anonymous"></script>
+    <script src="sneaker.js"></script>
+    <script src="product.js"></script>
+   
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" type="image/gif" href="./images/initialsIcon.png">
+    <title>Sneakers</title>
+
+
+    <style>
+       
+         li a :hover:not(.active) {
+          background-color: #8623c9;
+        }
+        
+        
+        h3{
+            text-align: center;
+        }
+
+ footer {
+   position:relative;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: gray;
+   color: black;
+   text-align: center;
+   font-style: italic;
+   
+ }
+
+ .ShoppingCart {
+    border: 1px solid #ccc; 
+    float: left; 
+  }
+        </style>
+</head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Brand -->
+    <a class="navbar-brand" href="index.html"><img src="./images/StoreLogo.png" style="width:250px;height:35px;"></a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon">
+      </span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sneaker.html">Sneakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+
+          <form class="form1" method="GET" role="search">
+            <input type="text" placeholder="Search by Brand" id="BrandName">
+            <button type="button"><i class="fa fa-search" onclick=getSneakersBrand()></i></button>
+
+      </li>
+     
+      </ul>
+     
+    </div> 
+</nav>
+
+<body class="containter-fluid bg-light" onload="initialize()">
+
+    <div id ="modals"></div>
+    <!-- Button to Open the Modal -->
+    
+
+    <h2 style="text-align: center"> Sneaker Portal</h2>
+    
+   
+    <div id ="modals"></div>
+
+    <!-- Page Content Below -->
+    <div id="pageLayout" class="d-flex row" style="padding-top: 5%">
+        <!-- Cards Displayed on Left -->
+        <div id="cardGroup" class="col-md-9 p2">
+            <div class="text-center" id="sneakers"></div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-2 mx-auto shoppingCart" style="display: none" id="cart">
+          <!-- Game Cart  -->
+          <div class="Cart">
+              <H5>Shopping Cart</H5>
+              <p id =CustomerCart></p>
+              
+              <p id= "totalCost"></P>
+                
+          </div>
+      </div>
+  </div>
+</div>
+       
+</body>
+</html>

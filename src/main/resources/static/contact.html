@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- USING BOOTSTRAP 4 -->
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="https://kit.fontawesome.com/bf1ae3b600.js" crossorigin="anonymous"></script>
+
+    <script>
+    function showPosition() {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showMap, showError);
+        } else {
+            alert("Sorry, your browser does not support HTML5 geolocation.");
+        }
+    }
+     
+    // Define callback function for successful attempt
+    function showMap(position) {
+        // Get location data
+        lat = 33.772530;
+        long = -84.523260;
+        
+        var latlong = new google.maps.LatLng(lat, long);
+        
+    
+        //this are the default settings for the map
+        var myOptions = {
+            center: latlong,
+            zoom: 16,
+            mapTypeControl: true,
+            navigationControlOptions: {
+                style:google.maps.NavigationControlStyle.SMALL
+            }
+        }
+        
+        var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
+        var marker = new google.maps.Marker({ position:latlong, map:map, title:"You are here!" });
+    }
+    // Define callback function for failed attempt
+function showError(error) {
+    if(error.code == 1) {
+        result.innerHTML = "You've decided not to share your position, but it's OK. We won't ask you again.";
+    } else if(error.code == 2) {
+        result.innerHTML = "The network is down or the positioning service can't be reached.";
+    } else if(error.code == 3) {
+        result.innerHTML = "The attempt timed out before it could get the location data.";
+    } else {
+        result.innerHTML = "Geolocation failed due to unknown error.";
+    }
+}
+     
+    
+    </script> 
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  
+    <link rel="icon" type="image/gif" href="./images/initialsIcon.png">
+    <title>Contact</title>
+
+
+    <style>
+       
+         li a:hover:not(.active) {
+          background-color: #8623c9;
+        }
+        
+        
+        h3{
+            text-align: center;
+        }
+
+ footer {
+   position:fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: gray;
+   color: black;
+   text-align: center;
+   font-style: italic;
+   
+ }
+ .contactinfo{
+     text-align: center;
+ }
+
+ 
+        </style>
+</head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Brand -->
+    <a class="navbar-brand" href="index.html"><img src="./images/StoreLogo.png" style="width:250px;height:35px;"></a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sneaker.html">Sneakers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+      </li>
+      </ul>
+    </div> 
+</nav>
+
+
+<body onload="showPosition()">
+    
+    
+    <div class="contactinfo">
+        <p>Store Address: 6542 Martin Luther King Dr. Atlanta, GA 30336</p>
+        <a href="tel://204-635-2147">
+                    <p><i class="fas fa-mobile"></i> 204-635-2147</p>
+        </a>
+            <a href="mailto:sneakers.majesty@gmail.com">
+        <p><i class="fas fa-envelope"></i> sneakers.majesty@gmail.com</p>
+        </a>
+    </div>
+
+    
+
+        <form class="Directions" action="http://maps.google.com/maps" method="get" target="_blank">
+            
+            <input type="hidden" name="daddr" value="6542 Martin Luther King Dr. Atlanta, GA 30336 (Sneakers Majesty)" />
+            <input type="submit" value="Get directions" />
+         </form>
+   
+    <div id="embedMap" style="width: 500px; height: 500px; image-orientation: from-image;">
+
+
+    <footer>
+        <p>Created by: Tamera Brown</p>
+        <p> 2020 Sneakers Majesty Inc. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
