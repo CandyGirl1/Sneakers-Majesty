@@ -62,7 +62,7 @@
   
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="index.html">Home</a>
         </li>
@@ -72,13 +72,12 @@
         <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
 
-          <form class="form1" method="GET" role="search">
-            <input type="text" placeholder="Search by Brand" id="BrandName">
-            <button type="button"><i class="fa fa-search" onclick=getSneakersBrand()></i></button>
-
-      </li>
+         </li>
      
       </ul>
+      <form class="form-inline my 2 my-lg-0" method="GET" role="search">
+        <input type="search" class="form-control mr-sm-2" placeholder="Search by Brand" id="BrandName">
+        <button type="button"><i class="fa fa-search" onclick="getSneakersBrand()"></i></button>
      
     </div> 
 </nav>
@@ -108,11 +107,16 @@
               <p id =CustomerCart></p>
               
               <p id= "totalCost"></P>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="CustomerForm()" > Finish Shopping</button>
                 
           </div>
       </div>
   </div>
 </div>
-       
+     
+    <footer>
+      <p>Created by: Tamera Brown</p>
+      <p> &#169 2020 Sneakers Majesty Inc. All Rights Reserved.</p>
+  </footer>  
 </body>
 </html>

@@ -79,6 +79,8 @@ function getSneakersBrand() {
             display.innerHTML = '';
            getSneakers(url);
         }
+     
+
     };
     //console.log(brand);
 
@@ -97,7 +99,7 @@ function renderSneaker(data) {
     // We can the iterate over all of our students
     for (var index = 0; index < json.length; index++) {
         // We wrtie our HTML in a string and use the insertAdjacentHTML(placement, string) where we pass the string to be rendered on our page
-        var cardHtml = '  <div class="card bg-primary"  style="width:400px" id="' + json[index].id + '">'
+        var cardHtml = '  <div class="card"  id="' + json[index].id + '">'
             + '<div class ="card-header"><h3>' + json[index].shoeName + ' </h3>'
             + '<img class="card-img-top" src=' + json[index].url + ' alt="Card image" style="width:100%">'
             + '<div class="card-body">'
@@ -147,7 +149,7 @@ function renderModal(modalPurpose, id) {
     switch (modalPurpose) {
         case "createSneaker":
             location = id;
-            color = "btn-success";
+            color = "btn btn-outline-info";
             btntxt = "Create a Sneaker";
             break;
         case "updateSneaker":
@@ -229,6 +231,7 @@ function createSneaker() {
         // When we send our JSON student, we need to covert it to String using JSON.stringify.  The header is what let's our recipient know that it should
         // be read as JSON
         xhttp.send(JSON.stringify(sendData));
+        sessionStorage.clear();
     }
 
 }
@@ -380,15 +383,16 @@ function sneakerForm(student, purpose) {
         + '</div>'
         + '<input type="number" class="form-control" placeholder="Enter Size" id="' + purpose + 'size' + id +'" value="' + size + '">'
         + '</div>'
-        + '<button type="submit" class="btn btn-success" width="100%" data-dismiss="modal" onclick="' + action + '">Submit</button>'
+        + '<button type="submit" class="btn btn-success btn-lg btn-block" width="100%" data-dismiss="modal" onclick="' + action + '">Submit</button>'
         + '</form>';
 
         // The HTML of the form above is a string, and can be called by other functions to be rendered where appropriate.
     return form;
 }
-function createCustomers(){
+
+function CustomerForm(){
   
-    var modalHtml = ' <div class="modal fade" id="myModal role=dialog> '
+    var CustomerModal = ' <div class="modal fade" id="myModal" role=dialog> '
     + ' <div class="modal-dialog modal-xl"> '
     + ' <div class="modal-content"> '
 
@@ -398,7 +402,28 @@ function createCustomers(){
     + '</div>'
 
     + '<div class="modal-body">'
-    
+     + '<form>'
+    + '<div class="input-group mb-3">'
+    + '<div class="input-group-prepend">'
+    + '<span class="input-group-text">First Name</span>'
+    + '</div>'
+    + '<input type="text" class="form-control" placeholder="Enter First Name" autocomplete="on" id="createCustomerfname">'
+    + '</div>'
+    + '<div class="input-group mb-3">'
+    + '<div class="input-group-prepend">'
+    + '<span class="input-group-text">Last Name</span>'
+    + '</div>'
+    + '<input type="text" class="form-control" placeholder="Enter Last Name" id="createCustomerlname">'
+    + '</div>'
+    + '<div class="input-group mb-3">'
+    + '<div class="input-group-prepend">'
+    + '<span class="input-group-text">Email</span>'
+    + '</div>'
+    + '<input type="text" class="form-control" placeholder="Enter Email" id="createCustomeremail">'
+    + '</div>'
+    + '<button type="submit" class="btn btn-success btn-lg btn-block" width="100%" data-dismiss="modal" onclick="createCustomer()">Complete Order</button>'
+    + '</form>'
+
 
     + '<div class="modal-footer">'
     + '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>'
@@ -408,6 +433,45 @@ function createCustomers(){
     + '</div>'
     + '</div>'
     + '</div>';
-    document.getElementById("modals").insertAdjacentHTML('beforeend', "CustomerModal");
-    return modalHtml;
+
+    document.getElementById("CustomerCart").insertAdjacentHTML('beforeend', CustomerModal);
+  
+   
+    return CustomerModal;
+}
+function createCustomer() {
+
+    // We need the JSON that will be in our POST body.  We retrieve the data from the form and store in the values.
+    var sendData = {
+        "fname": document.getElementById("createCustomerfname").value,
+        "lname": document.getElementById("createCustomerlname").value,
+        "email": document.getElementById("createCustomeremail").value,
+        "sneaker": []
+    }
+        
+    console.log(sendData);
+
+    // Confirmation about creating
+    var ok = confirm("Order Confirmation?");
+
+    if (ok == true) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/add/customer", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Update success");
+                // We need to refresh the display to show our new student, so we clear the div with our current cards on 
+                // display.  Then we call the function getStudents() to reload our cards.
+                //var display = document.getElementById("sneakers");
+                //display.innerHTML = '';
+                //getSneakers("/api/sneakers");
+                console.log("Customer created!");
+            }
+        };
+        // When we send our JSON student, we need to covert it to String using JSON.stringify.  The header is what let's our recipient know that it should
+        // be read as JSON
+        xhttp.send(JSON.stringify(sendData));
+        sessionStorage.clear();
+    }
 }

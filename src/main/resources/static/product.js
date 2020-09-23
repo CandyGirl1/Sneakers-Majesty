@@ -1,4 +1,4 @@
-console.log("load");
+
 var totalCost=0;
 let cartShoe = 0;
 function AddtoCart() {
@@ -26,14 +26,14 @@ function createList(shoe) {
     cartShoe++; 
     let root = document.getElementById("CustomerCart")
 
-    // Shopping List Game 
+    // Shopping List  
     let li = document.createElement("p");
     li.setAttribute("class", "shoeList");
     li.setAttribute("id", "cartShoe" + cartShoe)
     li.textContent = `${shoe.Name} $${shoe.price}`
     root.appendChild(li);
 
-    // remove Game Button 
+    // remove Shoe Button 
     let button = document.createElement("button");
     button.setAttribute("type", "button");
     button.setAttribute("class", "removeButton");
@@ -59,7 +59,7 @@ function removeShoe () {
     totalCost = totalCost-removePrice;
     x.textContent = "Total Cost: $" + totalCost;
 
-    // Remove Button and Game
+    // Remove Button and Shoe
     let elementID = event.target.getAttribute("id")
     let element = document.getElementById(elementID);
     element.parentNode.removeChild(element);
